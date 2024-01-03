@@ -2,6 +2,8 @@
 
 Implementation of Conway's Game of Life in c#
 
+[web demo](https://prdp-s-acharya.github.io/GameOfLife/GameOfLife/)
+
 ## Quick Start
 
 ### Build project
