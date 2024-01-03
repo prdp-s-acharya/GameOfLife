@@ -11,12 +11,11 @@ $ dotnet build
 
 ### Run
 ```console
-$ dotnet run
+$ dotnet run --no-build
 ```
-
 or
 ```console
-$ dotnet run 20 20 0.5
+$ dotnet run --no-build 20 20 0.5
 ```
 
 where arguments: 
