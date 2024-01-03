@@ -36,6 +36,9 @@
                         Console.WriteLine(ex.Message);
                     }
                 }
+
+                _grid = new bool[_r, _c];
+                _bufer = new bool[_r, _c];
             }
 
             var rand = new Random((int)DateTime.Now.Ticks);
