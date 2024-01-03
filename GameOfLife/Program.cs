@@ -41,20 +41,13 @@
                 _bufer = new bool[_r, _c];
             }
 
-            var rand = new Random((int)DateTime.Now.Ticks);
-
-            for (int i = 0; i < _r; i++)
-            {
-                for (int j = 0; j < _c; j++)
-                {
-                    _grid[i, j] = rand.NextDouble() > _comparator;
-                }
-            }
+            InitGrid();
 
             Console.Clear();
             Console.CursorVisible = false;
             Console.WriteLine("Conway's Game of Life");
             Console.WriteLine("press q to Quit");
+            Console.WriteLine("press r to Reset");
 
             while (true)
             {
@@ -69,18 +62,35 @@
                         Console.CursorVisible = true;
                         break;
                     }
+                    if(c.Key == ConsoleKey.R)
+                    {
+                        InitGrid();
+                    }
                 }
                 Thread.Sleep(1000/30);
             }
         }
 
+        static void InitGrid()
+        {
+
+            var rand = new Random((int)DateTime.Now.Ticks);
+
+            for (int i = 0; i < _r; i++)
+            {
+                for (int j = 0; j < _c; j++)
+                {
+                    _grid[i, j] = rand.NextDouble() > _comparator;
+                }
+            }
+        }
         static void Print()
         {
             List<(int x, int y, bool v)> diff = GetDiff();
 
             foreach (var cord in diff)
             {
-                Console.SetCursorPosition(cord.x * 2, cord.y + 3);
+                Console.SetCursorPosition(cord.x * 2, cord.y + 4);
                 Console.Write(cord.v ? "██" : "  ");
             }
         }
@@ -122,8 +132,8 @@
             {
                 for(int j = -1; j <= 1; j++)
                 {
-                    if (x + i < 0 || y + j < 0 || x + i >= _r || y + j >= _c || (i == 0 && j == 0)) continue;
-                    sLiveCount += _grid[x + i, y + j] ? 1 : 0;
+                    if (i == 0 && j == 0) continue;
+                    sLiveCount += _grid[(x + i + _r)% _r, (y + j + _c) % _c ] ? 1 : 0;
                 }
             }
             if (_grid[x, y])
